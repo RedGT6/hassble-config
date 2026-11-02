@@ -471,3 +471,57 @@ templates:
         - key: relay
           type: switch
           command: { on: "A10100", off: "A10000" }
+
+  - id: thermopro_tp357s
+    name: "ThermoPro TP357S"
+    description: "Temperature / humidity / battery from TP357S BLE advertisements"
+    device:
+      id: thermopro_tp357s
+      name: "ThermoPro TP357S"
+      source: advertisement
+      instance_mode: mac
+      match:
+        name_prefix: "TP357S"
+      sensors:
+        - key: temperature
+          device_class: temperature
+          unit: "°C"
+          state_class: measurement
+          accuracy_decimals: 1
+          source_field: raw
+          min_length: 25
+          decode:
+            offset: 21
+            length: 2
+            type: int16
+            endian: little
+            scale: 0.1
+
+        - key: humidity
+          device_class: humidity
+          unit: "%"
+          state_class: measurement
+          accuracy_decimals: 0
+          source_field: raw
+          min_length: 25
+          decode:
+            offset: 23
+            length: 1
+            type: uint8
+
+        - key: battery
+          device_class: battery
+          unit: "%"
+          state_class: measurement
+          accuracy_decimals: 0
+          source_field: raw
+          min_length: 25
+          decode:
+            offset: 24
+            length: 1
+            type: uint8
+            bitmask: 3
+            map:
+              "0": "1"
+              "1": "50"
+              "2": "100"
