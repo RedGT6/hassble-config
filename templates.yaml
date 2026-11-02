@@ -481,7 +481,7 @@ templates:
       source: advertisement
       instance_mode: mac
       match:
-        name_prefix: "TP357S"
+        mac: "CA:10:D8:7D:9D:75"
       sensors:
         - key: temperature
           device_class: temperature
