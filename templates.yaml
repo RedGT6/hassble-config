@@ -473,7 +473,7 @@ templates:
           command: { on: "A10100", off: "A10000" }
 
   - id: thermopro_tp357s
-    name: "ThermoPro TP357S"
+    name: "ThermoPro TP357S (name_prefix)"
     description: "Temperature / humidity / battery from TP357S BLE advertisements"
     device:
       id: thermopro_tp357s
